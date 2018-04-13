@@ -1,0 +1,61 @@
+server:
+  port: ${PORT:9999}
+  contextPath: /cli
+
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    org.springframework.cloud.sleuth: TRACE
+    org.springframework.cloud.sleuth.log: DEBUG
+    org.springframework.cloud.sleuth.trace: DEBUG
+    org.springframework.cloud.sleuth.instrument.rxjava: DEBUG
+    com.example.client.client.AuthClient: DEBUG
+
+spring.cloud.stream:
+  binder.rabbit.default.maxConcurrency: 5
+
+spring:
+  sleuth:
+    enabled: true
+# 1.0 means 100%, see http://cloud.spring.io/spring-cloud-sleuth/spring-cloud-sleuth.html#_sampling
+    sampler:
+      percentage: 1.0
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+
+ribbon:
+  eureka:
+    enabled: true
+feign:
+  timeout:
+    read: 10000
+    connect: 10000
+  name:
+    auth: auth-service
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+# https://github.com/Netflix/Hystrix/wiki/Configuration
+
+#hystrix:
+#  command:
+#    SimpleControlledFailCommand:
+#      circuitBreaker:
+#        errorThresholdPercentage: 50
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 10000
+#  stream:
+#    queue:
+#      send-id: false

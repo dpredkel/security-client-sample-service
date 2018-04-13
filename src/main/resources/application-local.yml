@@ -1,0 +1,38 @@
+#client eureka settings
+eureka:
+  user:
+    name: "{cipher}6c627b546202f13ffa9e3edf39974a3bfca5d615f58dcbfc23065661968b13c5"
+    password: "{cipher}75efd89c7c4d79220a5b3f35e9ad692a69c820fa0b99e9c48ae9433d45ba016db808ab9dce78382235e529291f8aa0be"
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.user.name}:${eureka.user.password}@127.0.0.1:8761/eureka/
+
+security:
+  user:
+    password: none
+  oauth2:
+    client:
+      clientId: "{cipher}297b6e6b567dce5bf6a561d20704db808098491ca7a051d8a175e6f4c75d60cb8e4c4264cf67d0590d06131844d6a4eb"
+      clientSecret: "{cipher}9ac8b21eb6977382efd105dfdf82e29352e5b00cbcdc434435893a7e932ecbefb68af5bae965a8f8b4a7ced483693db2"
+      grant-type: client_credentials
+      scope: server
+      auto-approve-scopes: '.*'
+      accessTokenUri: http://localhost:9000/uaa/oauth/token
+      userAuthorizationUri: http://localhost:9000/uaa/oauth/authorize
+    resource:
+      id: security-client-sample
+      jwt:
+        keyValue: |
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIzZofHFodYNc+hX++ig
+            VMmEPvL0Y8oa9TVB116TKV46baLaTMgi3DIda5IPYFeWulizruIy024prvL6Dtp1
+            VoQ8JyxP7olZQH85UeEfvBG6G9ik3SV8mgJ0lp+tvYxDXNlod05n8SRjajuWsZ41
+            3GXgj0TyZgYswyJGkhzA8tqbUhWNUWB5R42iZzArXujQ4t8QNe9CnBykUdrIv/jn
+            6VJTJhw/2nh+dhsXx2hnWClmu897muJhee9IaQn86EDIrE6wn7buF+5FHwQI9Sx7
+            7g7LbNpmJkqo6DdUIpkS2kst/eONRzCu+Nd/Uu0gWlcF/OxkE44Aa+fs/MhF+dEJ
+            FQIDAQAB
+            -----END PUBLIC KEY-----
